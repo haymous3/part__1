@@ -1,9 +1,16 @@
 const express = require("express");
+
+const api = express();
+
 const axios = require("axios");
 const serverless = require("serverless-http");
-// const helloRoute = require("./routes/helloRoutes");
-const app = express();
+
 const router = express.Router();
+const dotenv = require("dotenv");
+
+dotenv.config({
+  path: "./config.env",
+});
 
 router.get("/hello", async (req, res) => {
   try {
@@ -23,6 +30,6 @@ router.get("/hello", async (req, res) => {
   }
 });
 
-app.use("/.netlify/functions/api", router);
+api.use("/api", router);
 
-module.exports.handler = serverless(app);
+module.exports.handler = serverless(api);

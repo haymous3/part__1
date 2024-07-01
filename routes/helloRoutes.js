@@ -1,9 +1,11 @@
-const express = require("express");
+// import { Router } from "express";
 
-const router = express.Router();
+// import { helloHandler } from "../controller/helloController";
 
-const { getHello } = require("../controller/helloController");
+// const router = Router();
 
-router.route("/").get(getHello);
+// const helloRouter = () => {
+//   return router.route("/hello").get(helloHandler);
+// };
 
-module.exports = router;
+// export { helloRouter };
