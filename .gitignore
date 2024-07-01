@@ -1,0 +1,8 @@
+
+
+# Environment variables
+.env
+
+
+# Eslint configuration
+.eslintrc.json
