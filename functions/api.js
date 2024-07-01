@@ -1,6 +1,11 @@
+const express = require("express");
 const axios = require("axios");
+const serverless = require("serverless-http");
+// const helloRoute = require("./routes/helloRoutes");
+const app = express();
+const router = express.Router();
 
-exports.getHello = async (req, res) => {
+router.get("/hello", async (req, res) => {
   try {
     const { visitor_name } = req.query;
     const ip = await axios.get(
@@ -16,4 +21,8 @@ exports.getHello = async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-};
+});
+
+app.use("/.netlify/functions/api", router);
+
+module.exports.handler = serverless(app);
