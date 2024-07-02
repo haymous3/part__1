@@ -1,4 +1,5 @@
 const express = require("express");
+const requestIp = require("request-ip");
 
 const api = express();
 
@@ -11,6 +12,9 @@ const dotenv = require("dotenv");
 dotenv.config({
   path: "./config.env",
 });
+// Middleware to get the user's IP address
+api.use(requestIp.mw());
+api.set("trust proxy", true);
 
 router.get("/hello", async (req, res) => {
   try {
@@ -19,9 +23,16 @@ router.get("/hello", async (req, res) => {
       `https://ipgeolocation.abstractapi.com/v1/?api_key=${process.env.API_KEY}&ip_address=62.173.47.18`
     );
 
+    console.log(req.ip);
     const { ip_address, country } = ip.data;
     res.status(200).json({
-      client_ip: req.ip, // The IP address of the requester
+      // The IP address of the requester
+      client_ip:
+        req.headers["cf-connecting-ip"] ||
+        req.headers["x-real-ip"] ||
+        req.headers["x-forwarded-for"] ||
+        req.socket.remoteAddress ||
+        "",
       location: `${country}`, // The city of the requester
       greeting: `Hello, ${visitor_name}!, the temperature is 11 degrees Celcius in ${country}`,
     });
