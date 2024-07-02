@@ -24,11 +24,12 @@ router.get("/hello", async (req, res) => {
     );
 
     console.log(req.ip);
-    const { ip_address, country } = ip.data;
+    console.log(ip);
+    const { ip_address, city } = ip.data;
     res.status(200).json({
       client_ip: req.clientIp, // The IP address of the requester
-      location: `${country}`, // The city of the requester
-      greeting: `Hello, ${visitor_name}!, the temperature is 11 degrees Celcius in ${country}`,
+      location: `${city}`, // The city of the requester
+      greeting: `Hello, ${visitor_name}!, the temperature is 11 degrees Celcius in ${city}`,
     });
   } catch (err) {
     res.status(500).json({ error: err.message });

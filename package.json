@@ -1,9 +1,9 @@
 {
   "name": "stage_one_task",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "api.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "netlify/functions/api.js"
   },
   "author": "Adeyemo Amos",
   "license": "ISC",
