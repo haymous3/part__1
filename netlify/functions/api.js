@@ -26,13 +26,7 @@ router.get("/hello", async (req, res) => {
     console.log(req.ip);
     const { ip_address, country } = ip.data;
     res.status(200).json({
-      // The IP address of the requester
-      client_ip:
-        req.headers["cf-connecting-ip"] ||
-        req.headers["x-real-ip"] ||
-        req.headers["x-forwarded-for"] ||
-        req.socket.remoteAddress ||
-        "",
+      client_ip: req.clientIp, // The IP address of the requester
       location: `${country}`, // The city of the requester
       greeting: `Hello, ${visitor_name}!, the temperature is 11 degrees Celcius in ${country}`,
     });
