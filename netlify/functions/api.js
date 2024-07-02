@@ -23,8 +23,6 @@ router.get("/hello", async (req, res) => {
       `https://ipgeolocation.abstractapi.com/v1/?api_key=${process.env.API_KEY}&ip_address=62.173.47.18`
     );
 
-    console.log(req.ip);
-    console.log(ip);
     const { ip_address, city } = ip.data;
     res.status(200).json({
       client_ip: req.clientIp, // The IP address of the requester
