@@ -21,7 +21,7 @@ router.get("/hello", async (req, res) => {
 
     const { ip_address, country } = ip.data;
     res.status(200).json({
-      client_ip: `${ip_address}`, // The IP address of the requester
+      client_ip: req.ip, // The IP address of the requester
       location: `${country}`, // The city of the requester
       greeting: `Hello, ${visitor_name}!, the temperature is 11 degrees Celcius in ${country}`,
     });
